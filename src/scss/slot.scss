@@ -1,0 +1,144 @@
+.slot {
+  background: #000;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  //border: 1px solid red;
+  @media screen and (min-aspect-ratio: 3/2) {
+    height: 100vh;
+    width: 150vh;
+  }
+
+  @media screen and (max-aspect-ratio: 3/2) {
+    height: 100 / 3 * 2vw;
+    width: 100vw;
+  }
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.slot__bar_container {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+}
+
+.slot__bar {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.slot__bar_inner {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100 / 3 * 20%;
+  top: 0;
+  left: 0;
+}
+
+.slot__bar--animation > .slot__bar_inner {
+  transform: translate3d(0, 0, 0);
+  animation: slot__bar--animation 4s linear infinite;
+}
+
+@keyframes slot__bar--animation {
+  0% {
+    top: -1000 / 3 * 2%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.slot__button_container {
+  background: white;
+  height: 15%;
+  width: 100%;
+}
+
+.slot__item {
+  pointer-events: none;
+  width: 100%;
+  height: 5%;
+  background: url($img_folder + "symbolA.png") no-repeat;
+  background-size: 500% auto;
+  background-position-x: 25%;
+  background-position-y: center;
+}
+
+@mixin data-slot__item($image) {
+  background: url($img_folder + $image) no-repeat;
+  background-size: 500% auto;
+  background-position-y: center;
+}
+
+[data-slot__item="0"] {
+  @include data-slot__item("symbolA.png");
+}
+
+[data-slot__item="1"] {
+  @include data-slot__item("symbolB.png");
+}
+
+[data-slot__item="2"] {
+  @include data-slot__item("symbolC.png");
+}
+
+[data-slot__item="3"] {
+  @include data-slot__item("symbolD.png");
+}
+
+[data-slot__item="4"] {
+  @include data-slot__item("symbolE.png");
+}
+
+.slot__item--animation {
+  animation: slot__item--animation 2s steps(4) infinite;
+}
+
+@keyframes slot__item--animation {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+.slot__spin {
+  user-select: none;
+  position: fixed;
+  cursor: pointer;
+  background: #2196F3;
+  color: white;
+  width: 10vw;
+  height: 10vw;
+  border-radius: 10vw;
+  font-size: 2vw;
+  bottom: 1vw;
+  right: 1vw;
+  text-align: center;
+  line-height: 10vw;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.slot__spin:hover {
+  background: #42A5F5;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.slot__spin--disabled {
+  background: #9E9E9E;
+}
+
+.slot__spin--disabled:hover {
+  background: #9E9E9E;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
